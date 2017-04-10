@@ -88,7 +88,7 @@ public class SampleManualConnector extends AbstractManualConnectorInstance {
 		return null;
 	}
 	
-	public OperationResultStatus queryOperationStatus(String asyncronousOperationReference) {
+	public OperationResultStatus queryOperationStatus(String asyncronousOperationReference, OperationResult parentResult) throws ObjectNotFoundException, SchemaException {
 		// TODO Auto-generated method stub
 		return null;
 	}
