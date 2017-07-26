@@ -1,0 +1,63 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:int="http://integrator.domainname.eu">
+	<soapenv:Header>
+		<wsse:Security
+			xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+			xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+			<wsse:UsernameToken wsu:Id="UsernameToken-F9C91AC73379D272FA14914105597156">
+				<wsse:Username>admin</wsse:Username>
+				<wsse:Password
+					Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">adminpassword</wsse:Password>
+			</wsse:UsernameToken>
+		</wsse:Security>
+	</soapenv:Header>
+	<soapenv:Body>
+		<int:IntegrationOperationInput>
+			<ProfileName>IDMIncident</ProfileName>
+			<MessageType>Create</MessageType>
+			<Attributes>
+				<!--Zero or more repetitions: -->
+				<Attribute>
+					<Name>Detailed_Description</Name>
+					<Value>test description 12342</Value>
+				</Attribute>
+				<Attribute>
+					<Name>Description</Name>
+					<Value>test summary</Value>
+				</Attribute>
+				<Attribute>
+					<Name>Priority</Name>
+					<Value>4</Value>
+				</Attribute>
+				<Attribute>
+					<Name>Incident_Type</Name>
+					<Value>1</Value>
+				</Attribute>
+				<Attribute>
+					<Name>Reported_Source</Name>
+					<Value>10000</Value>
+				</Attribute>
+				<Attribute>
+					<Name>Service_Type</Name>
+					<Value>1</Value>
+				</Attribute>
+				<Attribute>
+					<Name>CI_Name</Name>
+					<Value>SYSTEM-NAME</Value>
+				</Attribute>
+				<Attribute>
+					<Name>Last_Name</Name>
+					<Value>IDM</Value>
+				</Attribute>
+				<Attribute>
+					<Name>First_Name</Name>
+					<Value>Integration</Value>
+				</Attribute>
+				<Attribute>
+					<Name>Message_ID</Name>
+					<Value>CREATE</Value>
+				</Attribute>
+			</Attributes>
+		</int:IntegrationOperationInput>
+	</soapenv:Body>
+</soapenv:Envelope>
