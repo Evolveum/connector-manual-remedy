@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://integrator.domainname.eu" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://integrator.domainname.eu">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://integrator.domainname.eu" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://integrator.domainname.eu">
+            
+  <xs:simpleType name="MessageTypeType">
+              
+    <xs:restriction base="xs:normalizedString">
+                
+      <xs:minLength value="1"/>
+                
+      <xs:maxLength value="60"/>
+              
+    </xs:restriction>
+            
+  </xs:simpleType>
+            
+  <xs:simpleType name="StatusEnumType">
+              
+    <xs:restriction base="xs:normalizedString">
+                
+      <xs:enumeration value="OK"/>
+                
+      <xs:enumeration value="WARNING"/>
+                
+      <xs:enumeration value="ERROR"/>
+              
+    </xs:restriction>
+            
+  </xs:simpleType>
+            
+  <xs:complexType name="AttributeType">
+              
+    <xs:sequence>
+                
+      <xs:element maxOccurs="1" minOccurs="1" name="Name" nillable="false" type="xs:string"/>
+                
+      <xs:element maxOccurs="1" minOccurs="1" name="Value" nillable="false" type="xs:string"/>
+              
+    </xs:sequence>
+            
+  </xs:complexType>
+            
+  <xs:complexType name="AttributesType">
+              
+    <xs:sequence>
+                
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Attribute" type="tns:AttributeType"/>
+              
+    </xs:sequence>
+            
+  </xs:complexType>
+            
+  <xs:element name="IntegrationOperationInput">
+                
+    <xs:complexType>
+                    
+      <xs:sequence>
+                        
+        <xs:element name="ProfileName" type="xs:string"/>
+                        
+        <xs:element name="MessageType" type="tns:MessageTypeType"/>
+                        
+        <xs:element name="Attributes" type="tns:AttributesType"/>
+                    
+      </xs:sequence>
+                
+    </xs:complexType>
+            
+  </xs:element>
+            
+  <xs:element name="IntegrationOperationOutput">
+                
+    <xs:complexType>
+                    
+      <xs:sequence>
+                        
+        <xs:element name="Status" type="tns:StatusEnumType"/>
+                        
+        <xs:element maxOccurs="1" minOccurs="0" name="Message" type="xs:string"/>
+                        
+        <xs:element maxOccurs="1" minOccurs="0" name="Attributes" type="tns:AttributesType"/>
+                    
+      </xs:sequence>
+                
+    </xs:complexType>
+            
+  </xs:element>
+        
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IntegrationOperationInput">
+    <wsdl:part element="tns:IntegrationOperationInput" name="in">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="IntegrationOperationOutput">
+    <wsdl:part element="tns:IntegrationOperationOutput" name="out">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IntegrationEndpoint">
+    <wsdl:operation name="IntegrationOperation">
+      <wsdl:input message="tns:IntegrationOperationInput">
+    </wsdl:input>
+      <wsdl:output message="tns:IntegrationOperationOutput">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IntegrationBinding" type="tns:IntegrationEndpoint">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="IntegrationOperation">
+      <soap:operation soapAction="http://integrator.domainname.eu/IntegrationOperation" style="document"/>
+      <wsdl:input>
+        <soap:body parts="in" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="out" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IntegrationEndpointService">
+    <wsdl:port binding="tns:IntegrationBinding" name="IntegrationService">
+      <soap:address location="http://l1rema32:9090/SoapContext/SoapPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

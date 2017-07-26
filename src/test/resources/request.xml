@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+		<wsse:Security
+			xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+			xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+			soap:mustUnderstand="1">
+			<wsse:UsernameToken
+				wsu:Id="UsernameToken-0fa47a96-f981-4e8e-a482-feda0aec778a">
+				<wsse:Username>mangione</wsse:Username>
+				<wsse:Password
+					Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">makebelieve</wsse:Password>
+			</wsse:UsernameToken>
+		</wsse:Security>
+	</SOAP-ENV:Header>
+	<soap:Body>
+		<ns2:IntegrationOperationInput
+			xmlns:ns2="http://integrator.domainname.eu">
+			<ProfileName>IDMIncident</ProfileName>
+			<MessageType>Search</MessageType>
+			<Attributes>
+				<Attribute>
+					<Name>test</Name>
+					<Value>value</Value>
+				</Attribute>
+			</Attributes>
+		</ns2:IntegrationOperationInput>
+	</soap:Body>
+</soap:Envelope>
